@@ -5,35 +5,31 @@ TopicSchema = require './models/Topic'
 tokenize = require './tokenize'
 
 findTopicsFromKeywords = (Topic, keywords) ->
-  deferred = Promise.defer()
-  Topic
+  mpromise = Topic
   .where
     text:
       '$in': keywords
-  .find (err, topics) ->
-    return deferred.reject err if err
-    deferred.resolve topics
-  deferred.promise
+  .find()
+  Promise mpromise
 
 module.exports = (System) ->
   Topic = System.registerModel 'Topic', TopicSchema
   ActivityItem = System.getModel 'ActivityItem'
 
   saveModel = (item) ->
-    deferred = Promise.defer()
-    item.save (err) ->
-      return deferred.reject err if err
-      where =
-        'attributes.topic': item._id
-      delta =
-        'attributes.rated': false
-      options =
-        multi: true
-      ActivityItem
-      .update where, delta, options, (err, updateResult) ->
-        console.log 'reset ratings', err, updateResult
-        deferred.resolve item
-    deferred.promise
+    Promise.promise (resolve, reject) ->
+      item.save (err) ->
+        return reject err if err
+        where =
+          'attributes.topic': item._id
+        delta =
+          'attributes.rated': false
+        options =
+          multi: true
+        ActivityItem
+        .update where, delta, options, (err, updateResult) ->
+          console.log 'reset ratings', err, updateResult
+          resolve item
 
   addTopics = (item) ->
     # console.log 'add topics', item._id ? item.message
