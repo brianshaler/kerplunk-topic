@@ -2,7 +2,7 @@
   "name": "kerplunk-topic",
   "displayName": "Topics",
   "description": "Adds a Topic field to activity items and performs basic tokenization on activity items",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "kerplunk": {
     "permissions": {
       "kerplunk-activityitem": {
