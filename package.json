@@ -22,7 +22,7 @@
   "main": "./lib/index.js",
   "dependencies": {
     "WNdb": "^3.1.1",
-    "lodash": "^3.7.0",
+    "lodash": "^4.6.1",
     "natural": "^0.2.1",
     "react": "^0.13.2",
     "stopwords": "0.0.4",

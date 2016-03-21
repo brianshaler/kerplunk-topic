@@ -55,14 +55,14 @@ module.exports = tokenize = (message) ->
         null
     .then (results) ->
       _keywords = _ results
-        .pluck 'keywords'
+        .map 'keywords'
         .compact()
         .flatten()
         .uniq()
         .value()
         .concat keywords
       _query = _ results
-        .pluck 'query'
+        .map 'query'
         .compact()
         .flatten()
         .uniq()

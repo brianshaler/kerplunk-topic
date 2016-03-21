@@ -50,7 +50,7 @@ module.exports = (System) ->
       ]
     .then (topics) ->
       topics = _.flatten topics
-      # console.log 'topics', _.pluck topics, 'text'
+      # console.log 'topics', _.map topics, 'text'
       item.attributes = {} unless item.attributes
       item.attributes.topic = _.map topics, (topic) ->
         topic._id ? topic
